@@ -1,0 +1,76 @@
+.backDrop {
+  @apply fixed;
+  @apply h-full w-full;
+  @apply top-0 left-0;
+  @apply bg-black/50;
+}
+
+.popupCard {
+  @apply fixed;
+  @apply flex flex-col;
+  @apply p-8;
+  @apply m-auto;
+  @apply inset-0;
+  @apply bg-slate-100;
+  @apply text-slate-800;
+  width: 90vw;
+  @apply h-max;
+  @apply rounded-2xl;
+  @apply shadow-2xl;
+
+  & > button {
+    @apply absolute;
+    @apply top-4 right-4;
+    @apply h-8 w-8;
+  }
+}
+
+.header {
+  @apply grid grid-cols-2 gap-8;
+  @apply items-center;
+  @apply mb-8;
+
+  h1 {
+    @apply text-4xl;
+    @apply font-bold;
+  }
+
+  a {
+    @apply flex flex-row gap-2;
+    @apply items-center;
+    background-color: #2081E2;
+    @apply py-2 px-6;
+    @apply rounded-xl;
+    @apply text-white hover:text-slate-800;
+    @apply w-max;
+    @apply h-10;
+    @apply shadow-md hover:shadow-lg;
+    
+    & > svg {
+      @apply h-4;
+    }
+  }
+}
+
+.contentContainer {
+  @apply grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 gap-8;
+
+  .leftSide {
+    img {
+      @apply w-full;
+      @apply h-auto;
+    }
+  }
+  
+  .rightSide {
+    .tokenData {
+      p {
+        @apply text-xl;
+        @apply text-ellipsis;
+        @apply whitespace-nowrap;
+        @apply overflow-hidden;
+        @apply mb-2 last:mb-0;
+      }
+    }
+  }
+}

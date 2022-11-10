@@ -1,9 +1,32 @@
-.container {
-  @apply p-0;
-}
-
 .main {
-  @apply flex flex-1 flex-col justify-center items-center;
-  @apply px-16 py-0;
+  @apply flex flex-1 flex-col items-center gap-8;
   @apply min-h-screen;
+  @apply p-8;
+
+  .navbar {
+    @apply grid grid-cols-2 gap-8;
+    @apply w-full;
+
+    & > div {
+      @apply flex items-center gap-8;
+
+      & > img {
+        @apply w-40;
+      }
+
+      & > h1 {
+        @apply hidden md:block;
+        @apply text-2xl;
+        @apply font-bold;
+        @apply text-slate-900;
+      }
+    }
+
+    & > input {
+      @apply w-full;
+      @apply border rounded-xl;
+      @apply px-4;
+      @apply text-sm md:text-base;
+    }
+  }
 }

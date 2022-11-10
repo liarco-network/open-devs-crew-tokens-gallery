@@ -1,0 +1,32 @@
+.tokenList {
+  @apply grid grid-cols-2 md:grid-cols-4;
+  @apply gap-8;
+  @apply w-full;
+  @apply h-max;
+
+  & li {
+    @apply cursor-pointer;
+    @apply bg-white;
+    @apply drop-shadow-md hover:drop-shadow-xl;
+    @apply rounded-2xl;
+    @apply transition-all;
+    @apply duration-300;
+    
+    div {
+      @apply overflow-hidden;
+      @apply rounded-t-2xl;
+
+      img {
+        @apply hover:scale-110;
+        @apply transition-all duration-300 ease-in-out;
+      }
+    }
+
+    span {
+      @apply block;
+      @apply px-4 py-6;
+      @apply text-slate-800;
+      @apply font-bold;
+    }
+  }
+}
