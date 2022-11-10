@@ -1,0 +1,9 @@
+.container {
+  @apply p-0;
+}
+
+.main {
+  @apply flex flex-1 flex-col justify-center items-center;
+  @apply px-16 py-0;
+  @apply min-h-screen;
+}
