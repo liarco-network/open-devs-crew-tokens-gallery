@@ -22,9 +22,15 @@ const TokensListComponent = ({queryParam}: {queryParam: string}) => {
  
   useEffect(() => {
     if (tokensData) {
-      setCollectionTokenData(tokensData);
+      setCollectionTokenData(tokensData.filter((token: TokenData) => {
+        const tokenId = token.tokenId.toString();
+
+        if (queryParam.length === 0 || tokenId.includes(queryParam)) {
+          return token;
+        }
+      }));
     }
-  }, [tokensData]);
+  }, [tokensData, queryParam]);
 
   return (
     <>
@@ -33,23 +39,26 @@ const TokensListComponent = ({queryParam}: {queryParam: string}) => {
           {
             collectionTokenData.map((token, index) => {
               const tokenId = token.tokenId.toString();
-              if (queryParam.length === 0 || tokenId.includes(queryParam)) {
-                return (
-                  <li
-                    key={index}
-                    onClick={() => setPopupTokenData(token)}
-                  >
-                    <div>
-                      <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${tokenId}.jpg`} alt="" />
-                    </div>
-                    <span>#{tokenId}</span>
-                  </li>
-                )
-              }
+              return (
+                <li
+                  key={index}
+                  onClick={() => setPopupTokenData(token)}
+                >
+                  <div>
+                    <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${tokenId}.jpg`} alt="" />
+                  </div>
+                  <span>#{tokenId}</span>
+                </li>
+              )
             })
           }
         </ul>
       }
+
+      {(collectionTokenData && collectionTokenData.length === 0) && 
+        <p className={styles.noResults}>No results</p>
+      }
+
       {(popupTokenData !== undefined) &&
         <TokenPopupCard
           token={popupTokenData}

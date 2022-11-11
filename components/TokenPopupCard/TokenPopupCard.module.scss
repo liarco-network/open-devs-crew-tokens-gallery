@@ -1,75 +1,147 @@
 .backDrop {
   @apply fixed;
+  @apply flex justify-center items-center;
   @apply h-full w-full;
   @apply top-0 left-0;
+  @apply md:p-8;
   @apply bg-black/50;
+  @apply overflow-scroll;
 }
 
 .popupCard {
-  @apply fixed;
+  @apply relative;
   @apply flex flex-col;
-  @apply p-8;
+  @apply w-full md:w-max md:max-w-[98vw];
+  @apply h-auto md:min-h-max;
+  @apply p-8 lg:p-16;
   @apply m-auto;
   @apply inset-0;
   @apply bg-slate-100;
   @apply text-slate-800;
-  width: 90vw;
-  @apply h-max;
-  @apply rounded-2xl;
-  @apply shadow-2xl;
+  @apply md:rounded-xl;
+  @apply shadow-xl;
 
-  & > button {
+  .closeButton {
     @apply absolute;
-    @apply top-4 right-4;
+    @apply hidden md:block;
+    @apply top-6 right-6;
     @apply h-8 w-8;
+    @apply text-xl;
+    @apply bg-slate-300/50;
+    @apply rounded-full;
+    @apply z-50;
+    @apply hover:scale-110;
+    @apply transition-transform;
+    @apply leading-normal;
   }
 }
 
 .header {
-  @apply grid grid-cols-2 gap-8;
-  @apply items-center;
-  @apply mb-8;
+  @apply lg:grid lg:grid-cols-2 gap-8;
+  @apply my-8 lg:mt-0;
 
-  h1 {
-    @apply text-4xl;
-    @apply font-bold;
+  & > div {
+    @apply flex flex-row;
+
+    @apply items-center;
+
+    h1 {
+      @apply text-3xl md:text-4xl;
+      @apply font-bold;
+    }
+  
+    a {
+      @apply flex flex-row items-center justify-center;
+      @apply w-8;
+      @apply h-8;
+      @apply ml-4 lg:ml-auto;
+      @apply p-3 md:p-5;
+      @apply rounded-full;
+      background-color: #2081E2;
+      @apply hover:scale-110;
+      @apply transition-all;
+      @apply shadow-md hover:shadow-lg;
+      
+      & > svg {
+        @apply absolute;
+        @apply h-[1.1rem] md:h-6;
+        @apply translate-x-px;
+      }
+    }
   }
 
-  a {
-    @apply flex flex-row gap-2;
-    @apply items-center;
-    background-color: #2081E2;
-    @apply py-2 px-6;
-    @apply rounded-xl;
-    @apply text-white hover:text-slate-800;
-    @apply w-max;
-    @apply h-10;
-    @apply shadow-md hover:shadow-lg;
-    
-    & > svg {
-      @apply h-4;
-    }
+  & > .closeButton {
+    @apply fixed;
+    @apply block md:hidden;
+    @apply top-4 right-4;
   }
 }
 
 .contentContainer {
-  @apply grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 gap-8;
+  @apply flex flex-col lg:grid lg:grid-cols-2 gap-8;
 
   .leftSide {
     img {
       @apply w-full;
       @apply h-auto;
+      @apply rounded-xl;
+      @apply drop-shadow-lg;
     }
   }
   
   .rightSide {
+    @apply flex flex-col justify-start;
+
     .tokenData {
+      &::after {
+        @apply block;
+        content: '';
+        @apply h-px;
+        @apply w-full;
+        @apply mt-8;
+        @apply bg-slate-900/25;
+      }
+
       p {
+        // TODO: fix text overflow
         @apply text-xl;
-        @apply text-ellipsis;
-        @apply whitespace-nowrap;
-        @apply overflow-hidden;
         @apply mb-2 last:mb-0;
+        
+        & > span {
+          @apply overflow-hidden;
+          @apply whitespace-nowrap;
+          @apply block md:inline;
+          @apply w-full;
+          @apply text-ellipsis;
+          @apply font-bold;
+        }
+      }
+    }
+
+    .tokenTraits {
+      @apply mt-8;
+
+      & > ul {
+        @apply grid md:grid-cols-2 gap-4 md:gap-8;
+
+        & li {
+          @apply py-2 px-4;
+          @apply bg-slate-200;
+          @apply rounded-xl;
+          @apply drop-shadow-md;
+
+          & span {
+            @apply text-sm;
+          }
+        }
+      }
+
+      & > p {
+        @apply animate-pulse;
+        @apply text-slate-600;
+        @apply font-bold;
+        @apply text-lg;
+        @apply text-center;
       }
     }
   }

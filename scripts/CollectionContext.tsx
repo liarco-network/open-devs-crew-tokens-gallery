@@ -27,7 +27,7 @@ export function CollectionProvider({ children }: Props) {
     address: contractAddress,
     abi: contractAbi,
     functionName: 'totalSupply',
-    watch: true,
+    watch: false,
   });
 
   const { data: tokensData } = useContractRead({

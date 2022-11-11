@@ -14,7 +14,7 @@
     
     div {
       @apply overflow-hidden;
-      @apply rounded-t-2xl;
+      @apply rounded-t-xl;
 
       img {
         @apply hover:scale-110;
@@ -29,4 +29,10 @@
       @apply font-bold;
     }
   }
+}
+
+.noResults {
+  @apply text-slate-600;
+  @apply font-bold;
+  @apply uppercase;
 }

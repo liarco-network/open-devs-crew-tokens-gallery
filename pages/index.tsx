@@ -4,10 +4,13 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import TokensListComponent from '../components/TokensListComponent'
 import OdcLogo from '../assets/images/odc-logo.png';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 const Home: NextPage = () => {
   const [ collectionQuery, setCollectionQuery ] = useState("");
+  const [ debouncedCollectionQuery ] = useDebounce(collectionQuery, 200);
+
 
   return (
     <>
@@ -25,15 +28,16 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
 
-        <div className={styles.navbar}>
+        <div className={styles.titleBar}>
           <div>
             <img src={OdcLogo.src} alt="" />
             <h1>Token Gallery</h1>
           </div>
-          <input placeholder='Search Token ID' value={collectionQuery} onChange={(e) => setCollectionQuery(e.target.value)} />
+          {/* TODO: remove type number */}
+          <input placeholder='Search Token ID' type={'number'} value={collectionQuery} onChange={(e) => setCollectionQuery(e.target.value)} />
         </div>
 
-        <TokensListComponent queryParam={collectionQuery} />
+        <TokensListComponent queryParam={debouncedCollectionQuery} />
       </main>
     </>
   )

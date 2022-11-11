@@ -1,9 +1,9 @@
 .main {
-  @apply flex flex-1 flex-col items-center gap-8;
+  @apply flex flex-1 flex-col items-center gap-8 lg:gap-16;
   @apply min-h-screen;
-  @apply p-8;
+  @apply p-8 lg:p-16;
 
-  .navbar {
+  .titleBar {
     @apply grid grid-cols-2 gap-8;
     @apply w-full;
 
