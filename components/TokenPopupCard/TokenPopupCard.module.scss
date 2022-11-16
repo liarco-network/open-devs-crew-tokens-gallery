@@ -1,8 +1,9 @@
 .backDrop {
   @apply fixed;
   @apply flex justify-center items-center;
-  @apply h-full w-full;
   @apply top-0 left-0;
+  @apply w-full;
+  @apply h-full;
   @apply md:p-8;
   @apply bg-black/50;
   @apply overflow-scroll;
@@ -13,8 +14,8 @@
   @apply flex flex-col;
   @apply w-full md:w-max md:max-w-[98vw];
   @apply h-auto md:min-h-max;
-  @apply p-8 lg:p-16;
   @apply m-auto;
+  @apply p-8 lg:p-16;
   @apply inset-0;
   @apply bg-slate-100;
   @apply text-slate-800;
@@ -41,7 +42,6 @@
 
   & > div {
     @apply flex flex-row;
-
     @apply items-center;
 
     h1 {
@@ -87,25 +87,24 @@
 
     .tokenData {
       &::after {
-        @apply block;
         content: '';
-        @apply h-px;
+        @apply block;
         @apply w-full;
+        @apply h-px;
         @apply mt-8;
         @apply bg-slate-900/25;
       }
 
       p {
-        // TODO: fix text overflow
         @apply text-xl;
         @apply mb-2 last:mb-0;
+        @apply overflow-hidden;
+        @apply whitespace-nowrap;
+        @apply text-ellipsis;
         
         & > span {
-          @apply overflow-hidden;
-          @apply whitespace-nowrap;
           @apply block md:inline;
           @apply w-full;
-          @apply text-ellipsis;
           @apply font-bold;
         }
       }

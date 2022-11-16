@@ -24,8 +24,8 @@
 
     & > input {
       @apply w-full;
-      @apply border rounded-xl;
       @apply px-4;
+      @apply border rounded-xl;
       @apply text-sm md:text-base;
     }
   }

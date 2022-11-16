@@ -101,7 +101,6 @@ const TokenPopupCard = ({token, callback}: Props) => {
                 :
                   <p>LOADING DATA</p>
                 }
-
             </div>
           </div>
         </div>
