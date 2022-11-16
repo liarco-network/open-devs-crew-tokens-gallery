@@ -11,7 +11,6 @@ const Home: NextPage = () => {
   const [ collectionQuery, setCollectionQuery ] = useState("");
   const [ debouncedCollectionQuery ] = useDebounce(collectionQuery, 200);
 
-
   return (
     <>
       <Head>
@@ -30,7 +29,7 @@ const Home: NextPage = () => {
 
         <div className={styles.titleBar}>
           <div>
-            <img src={OdcLogo.src} alt="" />
+            <img src={OdcLogo.src} alt="Open Devs Crew logo" />
             <h1>Token Gallery</h1>
           </div>
           <input

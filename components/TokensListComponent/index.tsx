@@ -1,4 +1,4 @@
-import { BigNumber, ethers } from 'ethers';
+import { BigNumber } from 'ethers';
 import { useState, useEffect } from 'react';
 import { useCollectionContext } from '../../scripts/CollectionContext';
 import TokenPopupCard from '../TokenPopupCard';
@@ -45,7 +45,7 @@ const TokensListComponent = ({queryParam}: {queryParam: string}) => {
                   onClick={() => setPopupTokenData(token)}
                 >
                   <div>
-                    <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${tokenId}.jpg`} alt="" />
+                    <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${tokenId}.jpg`} alt={`Token ${tokenId} thumbnail`} />
                   </div>
                   <span>#{tokenId}</span>
                 </li>

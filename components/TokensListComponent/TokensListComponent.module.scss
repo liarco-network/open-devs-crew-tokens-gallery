@@ -10,10 +10,13 @@
     @apply rounded-2xl;
     @apply transition-all;
     @apply duration-300;
-    
+
     div {
       @apply overflow-hidden;
       @apply rounded-t-xl;
+      @apply w-full;
+      @apply aspect-square;
+      @apply bg-slate-400;
 
       img {
         @apply hover:scale-110;
