@@ -22,9 +22,8 @@
   @apply shadow-xl;
 
   .closeButton {
-    @apply absolute;
-    @apply hidden md:block;
-    @apply top-6 right-6;
+    @apply fixed md:absolute;
+    @apply top-4 right-4 md:top-6 md:right-6;
     @apply h-8 w-8;
     @apply text-xl;
     @apply bg-slate-300/50;
@@ -68,12 +67,6 @@
         @apply translate-x-px;
       }
     }
-  }
-
-  & > .closeButton {
-    @apply fixed;
-    @apply block md:hidden;
-    @apply top-4 right-4;
   }
 }
 

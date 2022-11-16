@@ -2,7 +2,7 @@ import styles from './TokenPopupCard.module.scss';
 
 import { BigNumber, ethers } from 'ethers';
 import OpenSeaLogo from '../../assets/images/icons/opensea.svg';
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface TokenData {
   tokenId: BigNumber;
@@ -24,10 +24,6 @@ interface Props {
 
 const TokenPopupCard = ({token, callback}: Props) => {
   const [ tokenAttributes, setTokenAttributes ] = useState<TokenTrait[]>();
-
-  useEffect(() => {
-    parseMetadata();
-  },[]);
 
   const parseDate = (timestamp: BigNumber) => {
     if (timestamp.eq(0)) {
@@ -52,14 +48,16 @@ const TokenPopupCard = ({token, callback}: Props) => {
     }
   }
 
+  useEffect(() => {
+    parseMetadata();
+  },[]);
+
   return (
     <div className={styles.backDrop} onClick={callback}>
       <div className={styles.popupCard} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeButton} onClick={callback}>X</button>
 
         <div className={styles.header}>
-          <button className={styles.closeButton} onClick={callback}>X</button>
-
           <div>
             <h1>Open Dev #{token.tokenId.toNumber()}</h1>
             <a
