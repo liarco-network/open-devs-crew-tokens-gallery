@@ -3,6 +3,7 @@ import styles from './TokenPopupCard.module.scss';
 import { BigNumber, ethers } from 'ethers';
 import OpenSeaLogo from '../../assets/images/icons/opensea.svg';
 import { useEffect, useState } from 'react';
+import { useCollectionContext } from '../../scripts/CollectionContext';
 
 interface TokenData {
   tokenId: BigNumber;
@@ -12,9 +13,12 @@ interface TokenData {
   ownerLatestActivityTimestamp: BigNumber;
 }
 
-interface TokenTrait {
-  trait_type: string;
-  value: string;
+interface SingleTokenTraitData {
+  openRarity: {
+    rank: number;
+    score: number;
+  };
+  traits: number[];
 }
 
 interface Props {
@@ -23,7 +27,12 @@ interface Props {
 }
 
 const TokenPopupCard = ({token, callback}: Props) => {
-  const [ tokenAttributes, setTokenAttributes ] = useState<TokenTrait[]>();
+  const [ tokenTraits, setTokenTraits ] = useState<SingleTokenTraitData>();
+
+  const {
+    traitsData,
+    tokensTraitData,
+  } = useCollectionContext();
 
   const parseDate = (timestamp: BigNumber) => {
     if (timestamp.eq(0)) {
@@ -39,18 +48,19 @@ const TokenPopupCard = ({token, callback}: Props) => {
     return time >= 10 ? time : '0'+time;
   }
 
-  const parseMetadata = async () => {
-    try {
-      const res = await fetch(`https://cdn.opendevs.io/tokens/public/metadata/${token.tokenId.toString()}.json`)
-      setTokenAttributes((await res!.json()).attributes);
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    if (tokensTraitData) {
+      setTokenTraits(tokensTraitData[token.tokenId.toHexString()]);
     }
-  }
+  },[tokensTraitData]);
 
   useEffect(() => {
-    parseMetadata();
-  },[]);
+    document.body.style.overflow = 'hidden';
+
+    return ()=> {
+      document.body.style.overflow = 'auto';
+    }
+  }, []);
 
   return (
     <div className={styles.backDrop} onClick={callback}>
@@ -71,9 +81,7 @@ const TokenPopupCard = ({token, callback}: Props) => {
         </div>
 
         <div className={styles.contentContainer}>
-          <div className={styles.leftSide}>
             <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${token.tokenId}.jpg`} alt="" />
-          </div>
 
           <div className={styles.rightSide}>
             <div className={styles.tokenData}>
@@ -81,23 +89,22 @@ const TokenPopupCard = ({token, callback}: Props) => {
               <p>Token balance: <span>{parseFloat(ethers.utils.formatEther(token.tokenBalance)).toFixed(4)} ETH</span></p>
               <p>Latest transfer: <span>{parseDate(token.ownershipStartTimestamp)}</span></p>
               <p>Latest owner activity: <span>{parseDate(token.ownerLatestActivityTimestamp)}</span></p>
+              {tokenTraits && <p>OpenRarity Rank: <span>#{tokenTraits.openRarity.rank}</span></p>}
             </div>
 
             <div className={styles.tokenTraits}>
-                {tokenAttributes 
-                ?
-                <ul>
-                 {
-                  tokenAttributes.map((attribute, index) => {
+              {(tokenTraits && traitsData)
+              ?
+                 <ul>
+                  {tokenTraits.traits.map((trait, index) => {
                     return (
                       <li key={index}>
-                        <p><strong>{attribute.trait_type}</strong></p>
-                        <span>{attribute.value}</span>
+                        <p><strong>{traitsData[index].name}</strong></p>
+                        <span>{traitsData[index].values[trait]}</span>
                       </li>
-                    )
-                    })
-                  }
-                </ul>
+                    );
+                  })}
+                 </ul>
                 :
                   <p>LOADING DATA</p>
                 }

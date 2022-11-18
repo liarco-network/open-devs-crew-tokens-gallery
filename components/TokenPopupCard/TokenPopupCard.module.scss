@@ -72,27 +72,48 @@
 
 .contentContainer {
   @apply flex flex-col lg:grid lg:grid-cols-2 gap-8;
+  @apply w-full h-min;
 
-  .leftSide {
     img {
       @apply w-full;
       @apply h-auto;
       @apply rounded-xl;
       @apply drop-shadow-lg;
     }
-  }
-  
+
   .rightSide {
-    @apply flex flex-col justify-start;
+    @apply w-full;
+    @apply relative;
+    @apply lg:aspect-square;
+    @apply lg:overflow-auto;
+    @apply flex flex-col lg:grid;
+    grid-template-columns: 100%;
+    grid-template-rows: min-content auto;
+
+    &::after {
+      content: '';
+      @apply absolute;
+      @apply hidden lg:block;
+      @apply left-0;
+      @apply w-full h-8;
+      @apply z-10;
+    }
+
+    &::after {
+      bottom: 0;
+      @apply bg-gradient-to-t from-slate-100 to-transparent;
+    }
 
     .tokenData {
       &::after {
         content: '';
         @apply block;
+        @apply relative;
         @apply w-full;
         @apply h-px;
         @apply mt-8;
         @apply bg-slate-900/25;
+        @apply z-20;
       }
 
       p {
@@ -111,7 +132,8 @@
     }
 
     .tokenTraits {
-      @apply mt-8;
+      @apply py-8;
+      @apply lg:overflow-scroll;
 
       & > ul {
         @apply grid md:grid-cols-2 gap-4 md:gap-8;
