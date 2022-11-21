@@ -24,21 +24,23 @@
 
   .closeButton {
     @apply fixed md:absolute;
+    @apply flex items-center justify-center;
     @apply top-4 right-4 md:top-6 md:right-6;
     @apply h-8 w-8;
     @apply text-xl;
-    @apply bg-slate-300/50;
+    @apply bg-slate-300/50 hover:bg-slate-300;
     @apply rounded-full;
     @apply z-50;
     @apply hover:scale-110;
-    @apply transition-transform;
+    @apply transition-all;
     @apply leading-normal;
 
     & > svg {
       @apply block;
       @apply relative;
-      @apply w-full h-full;
-      @apply fill-slate-900;
+      @apply w-3/4 h-3/4;
+
+      @apply fill-slate-600;
     }
   }
 }
