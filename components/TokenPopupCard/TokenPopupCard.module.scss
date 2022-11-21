@@ -12,7 +12,7 @@
 .popupCard {
   @apply relative;
   @apply flex flex-col;
-  @apply w-full md:w-max md:max-w-[98vw];
+  @apply w-full md:w-max md:max-w-[80rem];
   @apply h-auto md:min-h-max;
   @apply m-auto;
   @apply p-8 lg:p-16;
@@ -38,7 +38,7 @@
 
 .header {
   @apply lg:grid lg:grid-cols-2 gap-8;
-  @apply my-8 lg:mt-0;
+  @apply mt-8 mb-4 lg:mt-0;
 
   & > div {
     @apply flex flex-row;
@@ -50,21 +50,17 @@
     }
   
     a {
-      @apply flex flex-row items-center justify-center;
-      @apply w-8;
-      @apply h-8;
       @apply ml-4 lg:ml-auto;
-      @apply p-3 md:p-5;
-      @apply rounded-full;
-      background-color: #2081E2;
       @apply hover:scale-110;
       @apply transition-all;
-      @apply shadow-md hover:shadow-lg;
       
       & > svg {
-        @apply absolute;
-        @apply h-[1.1rem] md:h-6;
-        @apply translate-x-px;
+        @apply w-10;
+        @apply h-auto;
+
+        * {
+          @apply fill-[#2081E2];
+        }
       }
     }
   }
@@ -104,29 +100,40 @@
       @apply bg-gradient-to-t from-slate-100 to-transparent;
     }
 
-    .tokenData {
+    .tokenInfo {
+      @apply flex flex-col sm:grid sm:grid-cols-2 gap-4 sm:gap-x-8 sm:gap-y-4;
+
       &::after {
+        @apply sm:col-span-2;
         content: '';
         @apply block;
         @apply relative;
         @apply w-full;
         @apply h-px;
-        @apply mt-8;
         @apply bg-slate-900/25;
         @apply z-20;
       }
 
-      p {
-        @apply text-xl;
-        @apply mb-2 last:mb-0;
-        @apply overflow-hidden;
-        @apply whitespace-nowrap;
-        @apply text-ellipsis;
-        
-        & > span {
-          @apply block md:inline;
-          @apply w-full;
+      & > div {
+        @apply flex flex-col justify-start;
+
+        & dt {
+          @apply text-slate-600;
+          @apply text-sm;
           @apply font-bold;
+
+          &:after {
+            content: ': ';
+            @apply hidden lg:inline;
+          }
+        }
+
+        .owner {
+          @apply flex justify-start items-center gap-2;
+        }
+
+        svg {
+          @apply h-[1.125rem];
         }
       }
     }
@@ -135,17 +142,19 @@
       @apply py-8;
       @apply lg:overflow-scroll;
 
-      & > ul {
+      & > dl {
         @apply grid md:grid-cols-2 gap-4 md:gap-8;
 
-        & li {
+        & > div {
           @apply py-2 px-4;
           @apply bg-slate-200;
           @apply rounded-xl;
           @apply drop-shadow-md;
 
-          & span {
-            @apply text-sm;
+          & dt {
+            @apply text-xs;
+            @apply font-bold;
+            @apply text-slate-500;
           }
         }
       }

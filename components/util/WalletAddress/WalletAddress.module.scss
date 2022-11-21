@@ -1,0 +1,33 @@
+.walletAddress {
+  @apply flex flex-nowrap items-center gap-2;
+  @apply font-bold;
+
+  @apply active:opacity-60;
+
+  &:hover {
+    span {
+      @apply opacity-80;
+    }
+
+    svg * {
+      @apply fill-sky-800/[0.5];
+    }
+  }
+
+  span {
+    @apply block;
+    @apply w-[12ch];
+    @apply overflow-hidden;
+    @apply text-ellipsis;
+    @apply font-mono;
+  }
+
+  svg {
+    @apply w-auto;
+    @apply h-[1em];
+
+    * {
+      @apply fill-sky-800/[0.7];
+    }
+  }
+}

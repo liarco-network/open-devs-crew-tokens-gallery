@@ -1,0 +1,12 @@
+.advancedLink {
+  @apply inline-block;
+
+  svg {
+    @apply w-auto;
+    @apply h-[1em];
+
+    * {
+      @apply fill-inherit;
+    }
+  }
+}

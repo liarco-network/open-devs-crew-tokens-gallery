@@ -26,3 +26,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+a {
+  @apply text-sky-800 decoration-sky-800;
+  @apply fill-sky-800/[0.7] hover:fill-sky-800;
+
+  @apply hover:underline;
+}

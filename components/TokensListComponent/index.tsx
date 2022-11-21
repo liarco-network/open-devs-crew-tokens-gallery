@@ -12,7 +12,7 @@ interface TokenData {
   ownerLatestActivityTimestamp: BigNumber;
 }
 
-const TokensListComponent = ({queryParam}: {queryParam: string}) => {
+const TokensListComponent = ({ queryParam }: { queryParam: string }) => {
   const [ collectionTokenData, setCollectionTokenData ] = useState<TokenData[]|undefined>();
   const [ popupTokenData, setPopupTokenData ] = useState<TokenData>();
 
@@ -45,7 +45,7 @@ const TokensListComponent = ({queryParam}: {queryParam: string}) => {
                   onClick={() => setPopupTokenData(token)}
                 >
                   <div>
-                    <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${tokenId}.jpg`} alt={`Token ${tokenId} thumbnail`} />
+                    <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${tokenId}.jpg`} alt={`Token ${tokenId} thumbnail`} loading="lazy" />
                   </div>
                   <span>#{tokenId}</span>
                 </li>

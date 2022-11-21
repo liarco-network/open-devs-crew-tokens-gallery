@@ -1,9 +1,14 @@
 import styles from './TokenPopupCard.module.scss';
 
 import { BigNumber, ethers } from 'ethers';
-import OpenSeaLogo from '../../assets/images/icons/opensea.svg';
 import { useEffect, useState } from 'react';
+
 import { useCollectionContext } from '../../scripts/CollectionContext';
+import AddressLinkEtherscan from '../util/AddressLinkEtherscan';
+
+import OpenSeaLogo from '../../assets/images/icons/opensea.svg';
+import AddressLinkOpenSea from '../util/AddressLinkOpenSea';
+import WalletAddress from '../util/WalletAddress';
 
 interface TokenData {
   tokenId: BigNumber;
@@ -26,7 +31,7 @@ interface Props {
   callback: () => void;
 }
 
-const TokenPopupCard = ({token, callback}: Props) => {
+const TokenPopupCard = ({ token, callback }: Props) => {
   const [ tokenTraits, setTokenTraits ] = useState<SingleTokenTraitData>();
 
   const {
@@ -35,10 +40,6 @@ const TokenPopupCard = ({token, callback}: Props) => {
   } = useCollectionContext();
 
   const parseDate = (timestamp: BigNumber) => {
-    if (timestamp.eq(0)) {
-      return 'No activity yet';
-    }
-
     const date = new Date(1000 * timestamp.toNumber());
 
     return `${date.getUTCFullYear()}-${date.getMonth() + 1}-${date.getUTCDate()} ${formatZero(date.getUTCHours())}:${formatZero(date.getUTCMinutes())} UTC`
@@ -81,30 +82,45 @@ const TokenPopupCard = ({token, callback}: Props) => {
         </div>
 
         <div className={styles.contentContainer}>
-            <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${token.tokenId}.jpg`} alt="" />
+          <img src={`https://cdn.opendevs.io/tokens/public/thumbnails/${token.tokenId}.jpg`} alt="" />
 
           <div className={styles.rightSide}>
-            <div className={styles.tokenData}>
-              <p>Owner: <span>{token.ownerAddress}</span></p>
-              <p>Token balance: <span>{parseFloat(ethers.utils.formatEther(token.tokenBalance)).toFixed(4)} ETH</span></p>
-              <p>Latest transfer: <span>{parseDate(token.ownershipStartTimestamp)}</span></p>
-              <p>Latest owner activity: <span>{parseDate(token.ownerLatestActivityTimestamp)}</span></p>
-              {tokenTraits && <p>OpenRarity Rank: <span>#{tokenTraits.openRarity.rank}</span></p>}
-            </div>
+            <dl className={styles.tokenInfo}>
+              <div>
+                <dt>Owner</dt>
+                <dd className={styles.owner}><WalletAddress address={token.ownerAddress} /> <AddressLinkEtherscan address={token.ownerAddress} /> <AddressLinkOpenSea address={token.ownerAddress} /></dd>
+              </div>
+              <div>
+                <dt>Token balance</dt>
+                <dd>{parseFloat(ethers.utils.formatEther(token.tokenBalance)).toFixed(4)} ETH</dd>
+              </div>
+              <div>
+                <dt>Latest transfer</dt>
+                <dd>{parseDate(token.ownershipStartTimestamp)}</dd>
+              </div>
+              <div>
+                <dt>Latest owner activity</dt>
+                <dd>{token.ownerLatestActivityTimestamp.eq(0) ? parseDate(token.ownershipStartTimestamp) : parseDate(token.ownerLatestActivityTimestamp)}</dd>
+              </div>
+              {tokenTraits && <div>
+                <dt>OpenRarity Rank</dt>
+                <dd>#{tokenTraits.openRarity.rank}</dd>
+              </div>}
+            </dl>
 
             <div className={styles.tokenTraits}>
               {(tokenTraits && traitsData)
               ?
-                 <ul>
+                 <dl>
                   {tokenTraits.traits.map((trait, index) => {
                     return (
-                      <li key={index}>
-                        <p><strong>{traitsData[index].name}</strong></p>
-                        <span>{traitsData[index].values[trait]}</span>
-                      </li>
+                      <div key={index}>
+                        <dt>{traitsData[index].name}</dt>
+                        <dd>{traitsData[index].values[trait]}</dd>
+                      </div>
                     );
                   })}
-                 </ul>
+                 </dl>
                 :
                   <p>LOADING DATA</p>
                 }
