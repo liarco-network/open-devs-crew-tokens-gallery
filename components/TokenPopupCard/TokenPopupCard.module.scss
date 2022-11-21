@@ -106,8 +106,9 @@
       &::after {
         @apply sm:col-span-2;
         content: '';
-        @apply block;
         @apply relative;
+        @apply block;
+        @apply mt-2;
         @apply w-full;
         @apply h-px;
         @apply bg-slate-900/25;
