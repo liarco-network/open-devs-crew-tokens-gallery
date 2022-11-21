@@ -6,6 +6,7 @@ import TokensListComponent from '../components/TokensListComponent'
 import OdcLogo from '../assets/images/odc-logo.png';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
+import Favicon from '../assets/images/icon.png';
 
 const Home: NextPage = () => {
   const [ collectionQuery, setCollectionQuery ] = useState("");
@@ -22,7 +23,7 @@ const Home: NextPage = () => {
         <meta property="og:image" content="#"></meta>
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_BASE_URL}/`}></meta> 
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={Favicon.src} />
       </Head>
 
       <main className={styles.main}>
