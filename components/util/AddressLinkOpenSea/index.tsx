@@ -10,7 +10,7 @@ interface Props {
 }
 
 const AddressLinkOpenSea = ({ address, children }: Props) => {
-  return <AdvancedLink href={`https://www.opensea.io/${address}`} target="_blank" title="View on OpenSea">
+  return <AdvancedLink href={`https://opensea.io/${address}`} target="_blank" title="View on OpenSea">
     {children === undefined ? <EtherscanLogo /> : children}
   </AdvancedLink>;
 };

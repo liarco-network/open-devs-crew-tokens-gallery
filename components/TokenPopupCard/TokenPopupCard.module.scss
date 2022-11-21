@@ -33,6 +33,12 @@
     @apply hover:scale-110;
     @apply transition-transform;
     @apply leading-normal;
+
+    & > svg {
+      @apply block;
+      @apply relative;
+      @apply w-full h-full;
+    }
   }
 }
 

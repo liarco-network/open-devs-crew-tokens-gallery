@@ -9,6 +9,7 @@ import AddressLinkEtherscan from '../util/AddressLinkEtherscan';
 import OpenSeaLogo from '../../assets/images/icons/opensea.svg';
 import AddressLinkOpenSea from '../util/AddressLinkOpenSea';
 import WalletAddress from '../util/WalletAddress';
+import CloseIcon from '../../assets/images/icons/close.svg';
 
 interface TokenData {
   tokenId: BigNumber;
@@ -66,7 +67,7 @@ const TokenPopupCard = ({ token, callback }: Props) => {
   return (
     <div className={styles.backDrop} onClick={callback}>
       <div className={styles.popupCard} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={callback}>X</button>
+        <button title="Close the popup" className={styles.closeButton} onClick={callback}><CloseIcon /></button>
 
         <div className={styles.header}>
           <div>
