@@ -1,0 +1,27 @@
+.filtersNotification {
+  @apply mb-4;
+  @apply font-semibold;
+  @apply text-red-700;
+}
+
+.userTokensList {
+  @apply grid grid-flow-row-dense;
+  @apply max-h-full;
+  @apply overflow-y-scroll;
+}
+
+.tokenListHeader {
+  @apply grid grid-cols-5 grid-rows-1;
+  @apply items-center justify-items-center;
+  @apply h-16;
+  @apply bg-slate-100;
+  @apply border-b;
+  @apply font-semibold;
+}
+
+.noTokenMatch {
+  @apply block;
+  @apply w-full;
+  @apply text-center;
+  @apply font-bold;
+}

@@ -1,0 +1,52 @@
+.withdrawPopup {
+  @apply absolute;
+  @apply flex items-center justify-center;
+  @apply top-0;
+  @apply left-0;
+  @apply h-full;
+  @apply w-full;
+  @apply bg-slate-900/50;
+
+  .popup {
+    @apply absolute;
+    @apply flex flex-col gap-4;
+    @apply p-8;
+    @apply max-w-sm;
+    @apply border rounded-xl;
+    @apply bg-slate-100;
+
+    ul {
+      @apply pl-6;
+      @apply list-disc;
+      @apply max-h-24;
+      @apply overflow-y-scroll;
+      @apply border rounded-xl;
+    }
+
+    .continueMessage {
+      @apply block;
+      @apply w-full;
+      @apply font-bold;
+      @apply text-center;
+    }
+
+    .subMessage {
+      @apply block;
+      @apply w-full;
+      @apply text-sm;
+      @apply text-center;
+      @apply text-slate-400;
+    }
+
+    .choice {
+      @apply flex justify-evenly gap-8;
+
+      & > button {
+        @apply py-4;
+        @apply w-full;
+        @apply bg-slate-200 hover:bg-slate-300;
+        @apply border rounded-xl;
+      }
+    }
+  }
+}

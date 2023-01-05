@@ -1,0 +1,16 @@
+.tokenListElement {
+  @apply grid grid-cols-5 grid-rows-1;
+  @apply items-center justify-items-center;
+  @apply h-16;
+  @apply border-b first:border-t;
+  @apply hover:bg-slate-100/50;
+
+  img {
+    @apply h-full w-auto;
+    @apply rounded-md;
+  }
+
+  span {
+    @apply flex items-center;
+  }
+}

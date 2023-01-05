@@ -1,10 +1,10 @@
 .main {
   @apply flex flex-1 flex-col items-center gap-8 lg:gap-16;
-  @apply min-h-screen;
+  height: calc(100vh - 6rem);
   @apply p-8 lg:p-16;
 
   .titleBar {
-    @apply grid grid-cols-2 gap-8;
+    @apply flex justify-between;
     @apply w-full;
 
     .leftSide {
@@ -23,14 +23,7 @@
     }
 
     .rightSide {
-      @apply flex gap-4;
-
-      input {
-        @apply w-full;
-        @apply px-4;
-        @apply border rounded-xl;
-        @apply text-sm md:text-base;
-      }
+      @apply flex flex-row gap-4;
 
       button {
         @apply flex gap-2;
@@ -39,7 +32,9 @@
         @apply hover:shadow-md;
 
         & > span {
+          @apply hidden md:inline-block;
           @apply text-slate-500;
+          @apply w-max;
         }
 
         & > svg {

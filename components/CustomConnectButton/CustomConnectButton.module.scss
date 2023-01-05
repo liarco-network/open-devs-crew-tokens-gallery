@@ -1,0 +1,52 @@
+.connectWalletButton,
+.wrongNetworkButton,
+.connectedButton {
+  @apply flex gap-2;
+  @apply p-4;
+  @apply border rounded-xl;
+  @apply hover:shadow-md;
+
+  & > span {
+    @apply hidden md:inline-block;
+    @apply text-slate-500;
+    @apply w-max;
+  }
+
+  & > svg {
+    @apply w-6 h-full;
+
+    & * {
+      @apply fill-slate-500;
+    }
+  }
+
+  &:hover {
+    & > svg * {
+      @apply fill-slate-600;
+    }
+
+    & > span {
+      @apply text-slate-600;
+    }
+  }
+}
+
+.wrongNetworkButton {
+  & > span {
+    @apply text-red-700;
+  }
+
+  & > svg * {
+    @apply fill-red-700;
+  }
+
+  &:hover {
+    & > svg * {
+      @apply fill-red-600;
+    }
+
+    & > span {
+      @apply text-red-600;
+    }
+  }
+}

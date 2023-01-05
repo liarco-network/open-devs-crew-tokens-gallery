@@ -1,8 +1,10 @@
+import styles from './TokensListComponent.module.scss';
+
 import { BigNumber } from 'ethers';
 import { useState, useEffect } from 'react';
+
 import { useCollectionContext } from '../../scripts/CollectionContext';
 import TokenPopupCard from '../TokenPopupCard';
-import styles from './TokensListComponent.module.scss';
 
 interface TokenData {
   tokenId: BigNumber;
@@ -19,7 +21,7 @@ const TokensListComponent = ({ queryParam }: { queryParam: string }) => {
   const {
     tokensData,
   } = useCollectionContext();
- 
+
   useEffect(() => {
     if (tokensData) {
       setCollectionTokenData(tokensData.filter((token: TokenData) => {
@@ -55,7 +57,7 @@ const TokensListComponent = ({ queryParam }: { queryParam: string }) => {
         </ul>
       }
 
-      {(collectionTokenData && collectionTokenData.length === 0) && 
+      {(collectionTokenData && collectionTokenData.length === 0) &&
         <p className={styles.noResults}>No results</p>
       }
 

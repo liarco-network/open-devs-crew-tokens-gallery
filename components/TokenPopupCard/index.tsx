@@ -7,9 +7,10 @@ import { useCollectionContext } from '../../scripts/CollectionContext';
 import AddressLinkEtherscan from '../util/AddressLinkEtherscan';
 
 import OpenSeaLogo from '../../assets/images/icons/opensea.svg';
+import { parseDate } from '../../scripts/utils/Aux';
+import CloseIcon from '../../assets/images/icons/close.svg';
 import AddressLinkOpenSea from '../util/AddressLinkOpenSea';
 import WalletAddress from '../util/WalletAddress';
-import CloseIcon from '../../assets/images/icons/close.svg';
 
 interface TokenData {
   tokenId: BigNumber;
@@ -32,23 +33,16 @@ interface Props {
   callback: () => void;
 }
 
+const TIMEOUT_DURATION_MS = 3000;
+
 const TokenPopupCard = ({ token, callback }: Props) => {
   const [ tokenTraits, setTokenTraits ] = useState<SingleTokenTraitData>();
+  const [ timeoutRequest, setTimeoutRequest] = useState(false);
 
   const {
     traitsData,
     tokensTraitData,
   } = useCollectionContext();
-
-  const parseDate = (timestamp: BigNumber) => {
-    const date = new Date(1000 * timestamp.toNumber());
-
-    return `${date.getUTCFullYear()}-${date.getMonth() + 1}-${date.getUTCDate()} ${formatZero(date.getUTCHours())}:${formatZero(date.getUTCMinutes())} UTC`
-  }
-
-  const formatZero = (time: number) => {
-    return time >= 10 ? time : '0'+time;
-  }
 
   useEffect(() => {
     if (tokensTraitData) {
@@ -58,9 +52,13 @@ const TokenPopupCard = ({ token, callback }: Props) => {
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    const timeId = setTimeout(() => {
+      setTimeoutRequest(true)
+    }, TIMEOUT_DURATION_MS);
 
     return ()=> {
       document.body.style.overflow = 'auto';
+      clearTimeout(timeId);
     }
   }, []);
 
@@ -112,19 +110,19 @@ const TokenPopupCard = ({ token, callback }: Props) => {
             <div className={styles.tokenTraits}>
               {(tokenTraits && traitsData)
               ?
-                 <dl>
-                  {tokenTraits.traits.map((trait, index) => {
-                    return (
-                      <div key={index}>
-                        <dt>{traitsData[index].name}</dt>
-                        <dd>{traitsData[index].values[trait]}</dd>
-                      </div>
-                    );
-                  })}
-                 </dl>
-                :
-                  <p>LOADING DATA</p>
-                }
+                <dl>
+                {tokenTraits.traits.map((trait, index) => {
+                  return (
+                    <div key={index}>
+                      <dt>{traitsData[index].name}</dt>
+                      <dd>{traitsData[index].values[trait]}</dd>
+                    </div>
+                  );
+                })}
+                </dl>
+              :
+                !timeoutRequest ? <p>LOADING DATA</p> : <p className={styles.notAvailable}>Data is not available for this token yet!</p>
+              }
             </div>
           </div>
         </div>

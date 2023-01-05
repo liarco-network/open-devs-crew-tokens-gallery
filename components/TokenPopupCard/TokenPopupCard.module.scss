@@ -57,12 +57,12 @@
       @apply text-3xl md:text-4xl;
       @apply font-bold;
     }
-  
+
     a {
       @apply ml-4 lg:ml-auto;
       @apply hover:scale-110;
       @apply transition-all;
-      
+
       & > svg {
         @apply w-10;
         @apply h-auto;
@@ -175,6 +175,10 @@
         @apply font-bold;
         @apply text-lg;
         @apply text-center;
+
+        &.notAvailable {
+          @apply animate-none;
+        }
       }
     }
   }

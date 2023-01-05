@@ -1,0 +1,43 @@
+.activityExpiration {
+  @apply relative;
+  @apply text-center;
+
+  h2 {
+    @apply w-max;
+    @apply font-bold text-lg;
+  }
+
+  .expiration {
+    @apply absolute;
+    @apply block;
+    @apply w-full;
+    @apply mt-0;
+    @apply text-xs;
+    @apply text-center;
+    @apply text-slate-400;
+  }
+}
+
+
+.userBalance {
+  h2 {
+    @apply w-max;
+    @apply font-bold text-lg;
+  }
+
+  span {
+    @apply block;
+    @apply text-center;
+  }
+}
+
+.withdrawButton {
+  @apply py-4 px-6;
+  @apply border rounded-xl;
+  @apply hover:text-slate-500 hover:shadow-md;
+  @apply disabled:bg-slate-200 disabled:border-slate-400;
+
+  &:disabled {
+    @apply hover:text-slate-900 hover:border-slate-400 hover:shadow-none;
+  }
+}
