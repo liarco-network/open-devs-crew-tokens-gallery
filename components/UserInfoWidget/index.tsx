@@ -1,11 +1,11 @@
 import styles from './UserInfoWidget.module.scss';
 
-import moment from "moment";
-import { useEffect, useMemo, useState } from "react";
+import moment from 'moment';
+import { useEffect, useMemo, useState } from 'react';
 import { BigNumber, ethers } from 'ethers';
 
-import { getLatestTimestamp, parseDate } from "../../scripts/utils/Aux";
-import { useCollectionContext } from "../../scripts/CollectionContext";
+import { getLatestTimestamp, parseDate } from '../../scripts/utils/Aux';
+import { useCollectionContext } from '../../scripts/CollectionContext';
 
 interface Props {
   openPopupCallback: () => void;
@@ -45,7 +45,7 @@ const UserInfoWidget = ({openPopupCallback}: Props) => {
       {userWalletAddress && userWallet.tokensData && userWallet.latestWithdrawTimestamp &&
         <>
           <div className={styles.activityExpiration}>
-            <h2>Latest account activity</h2>
+            <h2>Latest activity</h2>
             <span>{parseDate(latestTimestamp)}</span>
             <span className={styles.expiration}>Expires {moment(addressInactivityTimeFrame.add(latestTimestamp).mul(1000).toNumber()).fromNow()}</span>
           </div>

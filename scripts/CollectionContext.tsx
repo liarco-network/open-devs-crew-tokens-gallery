@@ -26,6 +26,7 @@ interface CollectionInterface {
   tokensData?: TokenData[];
   traitsData?: TraitData[];
   tokensTraitData?: TokenTraitData;
+  diamondHandsTimeFrame?: number;
 }
 
 interface TraitData {
@@ -87,7 +88,7 @@ export function CollectionProvider({ children }: Props) {
     functionName: 'getLatestWithdrawalTimestamp',
     args: [userWalletAddress],
     enabled: Boolean(userWalletAddress),
-  }) as unknown as { data:BigNumber };
+  }) as unknown as { data: BigNumber };
 
   const { data: addressInactivityTimeFrame } = useContractRead({
     address: contractAddress,
@@ -208,6 +209,7 @@ export function CollectionProvider({ children }: Props) {
     tokensData,
     traitsData,
     tokensTraitData,
+    diamondHandsTimeFrame: diamondHandsTimeFrame?.toNumber(),
   };
 
   return (

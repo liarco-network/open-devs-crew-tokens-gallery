@@ -64,7 +64,7 @@ const UserTokensComponent = ({ queryParam }: Props) => {
     {queriedTokens &&
       <>
         {hiddenSelectedTokens &&
-          <span className={styles.filtersNotification}>Some tokens are hidden by your filters!</span>
+          <span className={styles.filtersNotification}>Some tokens are hidden by filters!</span>
         }
         <div className={styles.tokenListHeader}>
           <div className={styles.selectAll}>
@@ -75,10 +75,10 @@ const UserTokensComponent = ({ queryParam }: Props) => {
               title={`${isAllSelected ? 'Deselect' : 'Select'} all`}
             />
           </div>
-          <span>Thumbnail</span>
+          <span>Open Dev</span>
           <span>ID</span>
           <span>Balance</span>
-          <span>Owned since</span>
+          <span>Received</span>
         </div>
         <ul className={styles.userTokensList}>
           {queriedTokens.map((token, key) => {
@@ -87,7 +87,7 @@ const UserTokensComponent = ({ queryParam }: Props) => {
 
         </ul>
         {(queriedTokens.length === 0 && userWallet.tokensData?.length !== 0 )&&
-          <span className={styles.noTokenMatch}>No token matches the search!</span>
+          <span className={styles.noTokenMatch}>No tokens matche the search!</span>
         }
       </>}
     </>);

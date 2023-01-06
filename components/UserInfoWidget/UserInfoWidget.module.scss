@@ -1,19 +1,17 @@
 .activityExpiration {
-  @apply relative;
-  @apply text-center;
+  @apply flex flex-col items-center;
 
   h2 {
     @apply w-max;
     @apply font-bold text-lg;
   }
 
+  span {
+    @apply whitespace-nowrap;
+  }
+
   .expiration {
-    @apply absolute;
-    @apply block;
-    @apply w-full;
-    @apply mt-0;
     @apply text-xs;
-    @apply text-center;
     @apply text-slate-400;
   }
 }

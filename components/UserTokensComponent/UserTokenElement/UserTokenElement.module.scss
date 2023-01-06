@@ -1,16 +1,26 @@
 .tokenListElement {
   @apply grid grid-cols-5 grid-rows-1;
   @apply items-center justify-items-center;
+  @apply py-2;
   @apply h-16;
   @apply border-b first:border-t;
   @apply hover:bg-slate-100/50;
 
   img {
-    @apply h-full w-auto;
+    @apply w-auto;
+    @apply h-full;
     @apply rounded-md;
   }
 
   span {
     @apply flex items-center;
+  }
+
+  .tokenOwnerSince {
+    @apply flex gap-2;
+
+    svg path {
+      @apply stroke-sky-500;
+    }
   }
 }

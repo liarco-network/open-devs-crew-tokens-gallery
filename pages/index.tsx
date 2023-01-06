@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
-import { BiWalletAlt } from "react-icons/bi";
+import { BiWalletAlt } from 'react-icons/bi';
 import { useAccount } from 'wagmi';
 import Link from 'next/link';
 
