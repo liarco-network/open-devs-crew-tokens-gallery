@@ -1,7 +1,7 @@
 .main {
-  @apply flex flex-1 flex-col items-center gap-8 lg:gap-16;
+  @apply flex flex-1 flex-col items-center gap-8;
   @apply min-h-screen;
-  @apply p-8 lg:p-16;
+  @apply p-4 sm:p-8;
 
   .titleBar {
     @apply grid grid-cols-2 gap-8;
@@ -11,40 +11,17 @@
       @apply flex items-center gap-8;
 
       img {
-        @apply w-40;
+        @apply w-auto;
+        @apply h-12;
       }
     }
 
     .rightSide {
       @apply flex justify-end gap-4;
 
-      button {
-        @apply flex gap-2;
-        @apply p-4;
-        @apply border rounded-xl;
-        @apply hover:shadow-md;
-
+      :global(.button) {
         & > span {
           @apply hidden sm:inline-block;
-          @apply text-slate-500;
-        }
-
-        & > svg {
-          @apply w-6 h-full;
-
-          & * {
-            @apply fill-slate-500;
-          }
-        }
-
-        &:hover {
-          & > svg * {
-            @apply fill-slate-600;
-          }
-
-          & > span {
-            @apply text-slate-600;
-          }
         }
       }
     }

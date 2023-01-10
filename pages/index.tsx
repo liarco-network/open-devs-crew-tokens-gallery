@@ -39,16 +39,17 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-
         <div className={styles.titleBar}>
           <div className={styles.leftSide}>
-            <img src={OdcLogo.src} alt="Open Devs Crew logo" />
+            <Link href={'/'}>
+              <img src={OdcLogo.src} alt="Open Devs Crew logo" />
+            </Link>
           </div>
           <div className={styles.rightSide}>
             {isUserConnected
             ?
-              <Link href={'/wallet'}>
-                <button><BiWalletAlt /> <span>Wallet</span></button>
+              <Link href={'/wallet'} passHref>
+                <a className='button'><BiWalletAlt /> Walet</a>
               </Link>
             :
               <CustomConnectButton />
@@ -65,7 +66,7 @@ const Home: NextPage = () => {
         <TokensListComponent queryParam={debouncedCollectionQuery} />
       </main>
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

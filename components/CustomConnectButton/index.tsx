@@ -3,6 +3,7 @@ import styles from './CustomConnectButton.module.scss';
 import { BiLogIn, BiUnlink, BiUser } from 'react-icons/bi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React from 'react';
+import Button from '../Button';
 
 const CustomConnectButton = () => {
   return (
@@ -29,24 +30,24 @@ const CustomConnectButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button className={styles.connectWalletButton} onClick={openConnectModal} type="button">
+                  <Button className={styles.connectWalletButton} onClick={openConnectModal}>
                     <BiLogIn /> <span>Connect</span>
-                  </button>
+                  </Button>
                 );
               }
 
               if (chain.unsupported) {
                 return (
-                  <button className={styles.wrongNetworkButton} onClick={openChainModal} type="button">
+                  <Button className={styles.wrongNetworkButton} onClick={openChainModal}>
                     <BiUnlink /> <span>Wrong network</span>
-                  </button>
+                  </Button>
                 );
               }
 
               return (
-                <button className={styles.connectedButton} onClick={openAccountModal} type="button">
+                <Button className={styles.connectedButton} onClick={openAccountModal}>
                   <BiUser /> <span>{account.displayName}</span>
-                </button>
+                </Button>
               );
             })()}
           </React.Fragment>

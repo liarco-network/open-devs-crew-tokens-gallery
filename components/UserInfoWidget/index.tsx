@@ -7,6 +7,7 @@ import { BigNumber, ethers } from 'ethers';
 import { getLatestTimestamp, parseDateWithoutTime } from '../../scripts/utils/Aux';
 import { useCollectionContext } from '../../scripts/CollectionContext';
 import { GrDiamond } from 'react-icons/gr';
+import Button from '../Button';
 
 interface Props {
   openPopupCallback: () => void;
@@ -85,13 +86,13 @@ const UserInfoWidget = ({openPopupCallback}: Props) => {
           </div>
 
           <div>
-            <button
+            <Button
               className={styles.withdrawButton}
               disabled={userWallet.selectedTokens.length === 0 || undefined === userWallet.diamondHolderToken}
               onClick={() => openPopupCallback()}
             >
               Withdraw
-            </button>
+            </Button>
           </div>
         </>
       }

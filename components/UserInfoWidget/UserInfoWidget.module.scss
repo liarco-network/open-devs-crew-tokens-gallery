@@ -18,18 +18,5 @@
 }
 
 .withdrawButton {
-  @apply px-6;
   @apply w-full;
-  @apply h-12;
-  @apply border rounded-xl;
-  @apply text-slate-500 hover:text-slate-600;
-  @apply disabled:text-slate-300;
-  @apply disabled:border-slate-200;
-  @apply hover:shadow-md;
-
-  &:disabled {
-    @apply hover:text-slate-300;
-    @apply hover:border-slate-200;
-    @apply hover:shadow-none;
-  }
 }

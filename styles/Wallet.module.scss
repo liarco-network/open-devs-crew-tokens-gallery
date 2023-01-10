@@ -1,7 +1,7 @@
 .main {
-  @apply flex flex-1 flex-col items-center gap-8 lg:gap-16;
+  @apply flex flex-1 flex-col items-center gap-8;
   height: calc(100vh - 6rem);
-  @apply p-4 sm:p-8 lg:p-16;
+  @apply p-4 sm:p-8;
 
   .titleBar {
     @apply flex justify-between;
@@ -19,36 +19,9 @@
     .rightSide {
       @apply flex flex-row gap-4;
 
-      button {
-        @apply flex gap-2;
-        @apply h-12;
-        @apply px-4;
-        @apply border rounded-xl;
-        @apply hover:shadow-md;
-
+      :global(.button) {
         & > span {
           @apply hidden md:inline-block;
-          @apply w-max;
-          @apply m-auto;
-          @apply text-slate-500;
-        }
-
-        & > svg {
-          @apply w-6 h-full;
-
-          & * {
-            @apply fill-slate-500;
-          }
-        }
-
-        &:hover {
-          & > svg * {
-            @apply fill-slate-600;
-          }
-
-          & > span {
-            @apply text-slate-600;
-          }
         }
       }
     }

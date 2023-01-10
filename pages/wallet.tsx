@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { BiGridAlt } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 
-const Home: NextPage = () => {
+const Wallet: NextPage = () => {
   const [ chainInfo, setChainInfo ] = useState<{isConnected: boolean, isRight: boolean}>({isConnected: false, isRight: false});
   const router = useRouter();
   const { chain } = useNetwork();
@@ -45,11 +45,13 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.titleBar}>
           <div className={styles.leftSide}>
-            <img src={OdcLogo.src} alt="Open Devs Crew logo" />
+            <Link href={'/'}>
+              <img src={OdcLogo.src} alt="Open Devs Crew logo" />
+            </Link>
           </div>
           <div className={styles.rightSide}>
-            <Link href={'/'}>
-              <button><BiGridAlt /> <span>Gallery</span></button>
+            <Link href={'/'} passHref>
+              <a className='button'><BiGridAlt /> <span>Gallery</span></a>
             </Link>
             <CustomConnectButton />
           </div>
@@ -68,7 +70,7 @@ const Home: NextPage = () => {
         }
       </main>
     </>
-  )
+  );
 }
 
-export default Home
+export default Wallet;

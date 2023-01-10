@@ -88,7 +88,7 @@ const UserTokensComponent = ({ queryParam }: Props) => {
 
         </ul>
         {(queriedTokens.length === 0 && userWallet.tokensData?.length !== 0 )&&
-          <span className={styles.noTokenMatch}>No tokens matches the search!</span>
+          <span className={styles.noTokenMatch}>No tokens match the search!</span>
         }
       </>}
       {(popupTokenData !== undefined) &&

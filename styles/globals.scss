@@ -33,3 +33,21 @@ a {
 
   @apply hover:underline;
 }
+
+.button {
+  @apply flex gap-2 justify-center items-center;
+  @apply h-12;
+  @apply px-4;
+  @apply border rounded-xl;
+  @apply hover:shadow-md;
+
+  @apply text-slate-500;
+  @apply hover:no-underline;
+
+  @apply disabled:opacity-50;
+  @apply disabled:hover:shadow-none;
+
+  & > svg {
+    @apply w-5 h-auto;
+  }
+}
