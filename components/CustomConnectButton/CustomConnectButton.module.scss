@@ -2,14 +2,16 @@
 .wrongNetworkButton,
 .connectedButton {
   @apply flex gap-2;
-  @apply p-4;
+  @apply h-12;
+  @apply px-4;
   @apply border rounded-xl;
   @apply hover:shadow-md;
 
   & > span {
     @apply hidden md:inline-block;
-    @apply text-slate-500;
     @apply w-max;
+    @apply m-auto;
+    @apply text-slate-500;
   }
 
   & > svg {

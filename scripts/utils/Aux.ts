@@ -15,6 +15,13 @@ export const parseDate = (timestamp: BigNumber | number) => {
   return `${date.getUTCFullYear()}-${date.getMonth() + 1}-${date.getUTCDate()} ${formatZero(date.getUTCHours())}:${formatZero(date.getUTCMinutes())} UTC`
 }
 
+export const parseDateWithoutTime = (timestamp: BigNumber | number) => {
+  const dateTimestamp = (typeof timestamp === 'number') ? timestamp : timestamp.toNumber();
+  const date = new Date(1000 * dateTimestamp);
+
+  return `${date.getUTCFullYear()}-${date.getMonth() + 1}-${date.getUTCDate()}`
+}
+
 const formatZero = (time: number) => {
   return time >= 10 ? time : '0'+time;
 }

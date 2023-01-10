@@ -13,24 +13,10 @@
       img {
         @apply w-40;
       }
-
-      h1 {
-        @apply hidden md:block;
-        @apply text-2xl;
-        @apply font-bold;
-        @apply text-slate-900;
-      }
     }
 
     .rightSide {
-      @apply flex gap-4;
-
-      input {
-        @apply w-full;
-        @apply px-4;
-        @apply border rounded-xl;
-        @apply text-sm md:text-base;
-      }
+      @apply flex justify-end gap-4;
 
       button {
         @apply flex gap-2;
@@ -39,6 +25,7 @@
         @apply hover:shadow-md;
 
         & > span {
+          @apply hidden sm:inline-block;
           @apply text-slate-500;
         }
 
@@ -61,5 +48,13 @@
         }
       }
     }
+  }
+
+  & > input {
+    @apply w-full;
+    @apply h-12;
+    @apply px-4;
+    @apply border rounded-xl;
+    @apply text-sm md:text-base;
   }
 }

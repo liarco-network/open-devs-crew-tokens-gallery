@@ -46,7 +46,6 @@ const Home: NextPage = () => {
         <div className={styles.titleBar}>
           <div className={styles.leftSide}>
             <img src={OdcLogo.src} alt="Open Devs Crew logo" />
-            <h1>My Wallet</h1>
           </div>
           <div className={styles.rightSide}>
             <Link href={'/'}>

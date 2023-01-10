@@ -3,7 +3,7 @@
   @apply w-full;
   @apply h-max;
 
-  & li {
+  li {
     @apply cursor-pointer;
     @apply bg-white;
     @apply drop-shadow-md hover:drop-shadow-xl;
@@ -27,7 +27,7 @@
 
     span {
       @apply block;
-      @apply px-4 py-6;
+      @apply px-4 py-3 sm:py-6;
       @apply text-slate-800;
       @apply font-bold;
     }

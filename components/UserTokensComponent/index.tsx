@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCollectionContext } from '../../scripts/CollectionContext';
 import { TokenData } from '../../scripts/utils/Aux';
 import UserTokenElement from './UserTokenElement';
+import TokenPopupCard from '../TokenPopupCard';
 
 interface Props {
   queryParam: string;
@@ -12,6 +13,7 @@ interface Props {
 
 const UserTokensComponent = ({ queryParam }: Props) => {
   const [ queriedTokens, setQueriedTokens ] = useState<TokenData[]>();
+  const [ popupTokenData, setPopupTokenData ] = useState<TokenData>();
   const [ isAllSelected, setIsAllSelected ] = useState<boolean>(false);
   const [ hiddenSelectedTokens, setHiddenSelectedTokens ] = useState<boolean>();
 
@@ -64,32 +66,37 @@ const UserTokensComponent = ({ queryParam }: Props) => {
     {queriedTokens &&
       <>
         {hiddenSelectedTokens &&
-          <span className={styles.filtersNotification}>Some tokens are hidden by filters!</span>
+          <span className={styles.filtersNotification}>Some selected tokens are hidden by your search filters!</span>
         }
         <div className={styles.tokenListHeader}>
-          <div className={styles.selectAll}>
-            <input
-              type="checkbox"
-              checked={isAllSelected}
-              onChange={(e) => setAllSelectedTokens(e.target.checked)}
-              title={`${isAllSelected ? 'Deselect' : 'Select'} all`}
-            />
-          </div>
-          <span>Open Dev</span>
+          <input
+            className={styles.selectAll}
+            type="checkbox"
+            checked={isAllSelected}
+            onChange={(e) => setAllSelectedTokens(e.target.checked)}
+            title={`${isAllSelected ? 'Deselect' : 'Select'} all`}
+          />
+          <span className={styles.hideable}>Open Dev</span>
           <span>ID</span>
           <span>Balance</span>
           <span>Received</span>
         </div>
         <ul className={styles.userTokensList}>
           {queriedTokens.map((token, key) => {
-            return <UserTokenElement key={key} token={token} />
+            return <UserTokenElement key={key} token={token} popupCallback={() => setPopupTokenData(token)} />
           })}
 
         </ul>
         {(queriedTokens.length === 0 && userWallet.tokensData?.length !== 0 )&&
-          <span className={styles.noTokenMatch}>No tokens matche the search!</span>
+          <span className={styles.noTokenMatch}>No tokens matches the search!</span>
         }
       </>}
+      {(popupTokenData !== undefined) &&
+        <TokenPopupCard
+          token={popupTokenData}
+          callback={() => setPopupTokenData(undefined)}
+        />
+      }
     </>);
 };
 

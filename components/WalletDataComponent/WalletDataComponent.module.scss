@@ -4,12 +4,14 @@
   @apply w-full;
 
   .widgets {
-    @apply flex justify-between items-center gap-8;
+    @apply grid grid-cols-2 grid-rows-3 sm:grid-cols-4 sm:grid-rows-2 gap-x-4 gap-y-2;
+    @apply md:flex justify-between items-center md:gap-8;
     @apply mb-8;
 
     .searchBar {
+      @apply sm:col-span-3;
       @apply w-full;
-      @apply h-16;
+      @apply h-12;
       @apply px-4;
       @apply border rounded-xl;
       @apply text-sm md:text-base;

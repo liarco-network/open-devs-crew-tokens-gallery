@@ -1,23 +1,54 @@
 .tokenListElement {
-  @apply grid grid-cols-5 grid-rows-1;
+  grid-template-columns: min-content 1fr 2fr 2fr;
+  @apply grid md:grid-cols-5 grid-rows-1;
   @apply items-center justify-items-center;
   @apply py-2;
   @apply h-16;
   @apply border-b first:border-t;
-  @apply hover:bg-slate-100/50;
+  @apply hover:bg-slate-50;
+
+  & > input {
+    @apply mx-4;
+  }
 
   img {
     @apply w-auto;
     @apply h-full;
     @apply rounded-md;
+    @apply cursor-pointer;
+    @apply hover:scale-105 hover:shadow-md;
+    @apply transition-transform duration-200;
+  }
+
+  .hideable {
+    @apply hidden md:block;
   }
 
   span {
     @apply flex items-center;
   }
 
+  .tokenId {
+    @apply flex flex-row items-center gap-1;
+    @apply text-slate-900;
+    @apply cursor-pointer;
+    @apply hover:scale-105;
+    @apply transition-transform duration-200;
+
+    & > svg * {
+      @apply block sm:hidden;
+      @apply fill-slate-400;
+    }
+  }
+
+  .tokenBalance {
+    @apply text-xs sm:text-base;
+  }
+
   .tokenOwnerSince {
     @apply flex gap-2;
+    @apply text-xs sm:text-base;
+    @apply text-slate-400;
 
     svg path {
       @apply stroke-sky-500;

@@ -11,12 +11,25 @@
 }
 
 .tokenListHeader {
-  @apply grid grid-cols-5 grid-rows-1;
+  grid-template-columns: min-content 1fr 2fr 2fr;
+  @apply grid md:grid-cols-5 grid-rows-1;
   @apply items-center justify-items-center;
   @apply h-16;
   @apply bg-slate-100;
   @apply border-b;
   @apply font-semibold;
+
+  & > span {
+    @apply text-center;
+  }
+}
+
+.selectAll {
+  @apply mx-4;
+}
+
+.hideable {
+  @apply hidden md:block;
 }
 
 .noTokenMatch {

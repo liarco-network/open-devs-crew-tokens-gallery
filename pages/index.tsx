@@ -43,15 +43,8 @@ const Home: NextPage = () => {
         <div className={styles.titleBar}>
           <div className={styles.leftSide}>
             <img src={OdcLogo.src} alt="Open Devs Crew logo" />
-            <h1>Token Gallery</h1>
           </div>
           <div className={styles.rightSide}>
-            <input
-              placeholder='Search Token ID'
-              type={'number'}
-              value={collectionQuery}
-              onChange={(e) => setCollectionQuery(e.target.value)}
-            />
             {isUserConnected
             ?
               <Link href={'/wallet'}>
@@ -62,6 +55,12 @@ const Home: NextPage = () => {
             }
           </div>
         </div>
+        <input
+          placeholder='Search Token ID'
+          type={'number'}
+          value={collectionQuery}
+          onChange={(e) => setCollectionQuery(e.target.value)}
+        />
 
         <TokensListComponent queryParam={debouncedCollectionQuery} />
       </main>
