@@ -45,8 +45,8 @@ const Wallet: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.titleBar}>
           <div className={styles.leftSide}>
-            <Link href={'/'}>
-              <img src={OdcLogo.src} alt="Open Devs Crew logo" />
+            <Link href={'/'} passHref>
+              <a><img src={OdcLogo.src} alt="Open Devs Crew logo" /></a>
             </Link>
           </div>
           <div className={styles.rightSide}>

@@ -1,3 +1,9 @@
+.connectWalletButton {
+  & > svg {
+    @apply -translate-x-[2px];
+  }
+}
+
 .wrongNetworkButton {
   & > span {
     @apply text-red-700;
