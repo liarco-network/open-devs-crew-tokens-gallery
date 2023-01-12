@@ -35,6 +35,7 @@ const UserTokensComponent = ({ queryParam }: Props) => {
           return token;
         }
       }));
+
       return;
     }
 
@@ -43,7 +44,14 @@ const UserTokensComponent = ({ queryParam }: Props) => {
 
   useEffect(() => {
     if (userWallet.tokensData) {
-      setIsAllSelected(userWallet.selectedTokens.length === userWallet.tokensData.length);
+      const selectedTokens = userWallet.tokensData.filter((token) => !token.tokenBalance.eq(0));
+
+      if (selectedTokens.length === 0) {
+        setIsAllSelected(false);
+        return;
+      }
+
+      setIsAllSelected(userWallet.selectedTokens.length === selectedTokens.length);
     }
   }, [userWallet.selectedTokens]);
 
@@ -74,6 +82,7 @@ const UserTokensComponent = ({ queryParam }: Props) => {
             type="checkbox"
             checked={isAllSelected}
             onChange={(e) => setAllSelectedTokens(e.target.checked)}
+            disabled={userWallet.tokensData?.filter((token) => !token.tokenBalance.eq(0)).length === 0}
             title={`${isAllSelected ? 'Deselect' : 'Select'} all`}
           />
           <span className={styles.hideable}>Open Dev</span>

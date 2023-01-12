@@ -12,15 +12,31 @@
     @apply flex flex-col gap-4;
     @apply p-8;
     @apply max-w-sm;
+    @apply w-full;
+    @apply min-h-[10rem];
     @apply border rounded-xl;
-    @apply bg-slate-100;
+    @apply bg-white;
 
     ul {
-      @apply pl-6;
-      @apply list-disc;
-      @apply max-h-24;
-      @apply overflow-y-scroll;
+      @apply grid grid-cols-3 grid-flow-row-dense gap-4;
+      @apply p-4;
+      @apply max-h-40;
       @apply border rounded-xl;
+      @apply overflow-y-scroll;
+
+      li {
+        @apply flex flex-col;
+
+        span {
+          @apply font-bold;
+        }
+      }
+    }
+
+    .singleToken {
+      @apply w-full;
+      @apply m-auto;
+      @apply aspect-square;
     }
 
     .continueMessage {
@@ -38,14 +54,26 @@
       @apply text-slate-400;
     }
 
+    .contentContainer {
+      @apply flex flex-col gap-4;
+      @apply m-auto;
+    }
+
+    .progress {
+      @apply animate-pulse;
+    }
+
+    .success {
+      @apply font-bold;
+      @apply text-lg;
+      @apply text-center;
+    }
+
     .choice {
       @apply flex justify-evenly gap-8;
 
       & > button {
-        @apply py-4;
         @apply w-full;
-        @apply bg-slate-200 hover:bg-slate-300;
-        @apply border rounded-xl;
       }
     }
   }

@@ -9,16 +9,7 @@
 
   & > input {
     @apply mx-4;
-    @apply cursor-pointer;
-  }
-
-  img {
-    @apply w-auto;
-    @apply h-full;
-    @apply rounded-md;
-    @apply cursor-pointer;
-    @apply hover:scale-105 hover:shadow-md;
-    @apply transition-transform duration-200;
+    @apply cursor-pointer disabled:cursor-default;
   }
 
   .hideable {
@@ -36,9 +27,12 @@
     @apply hover:scale-105;
     @apply transition-transform duration-200;
 
-    & > svg * {
+    & > svg {
       @apply block sm:hidden;
-      @apply fill-slate-400;
+
+      * {
+        @apply fill-slate-400;
+      }
     }
   }
 

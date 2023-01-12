@@ -1,0 +1,11 @@
+.thumbnail {
+  @apply w-auto;
+  @apply h-full;
+  @apply rounded-md;
+}
+
+.hoverable {
+  @apply hover:scale-105 hover:shadow-md;
+  @apply transition-transform duration-200;
+  @apply cursor-pointer;
+}

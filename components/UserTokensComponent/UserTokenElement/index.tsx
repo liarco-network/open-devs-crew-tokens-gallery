@@ -7,6 +7,7 @@ import moment from 'moment';
 
 import { useCollectionContext } from '../../../scripts/CollectionContext';
 import { TokenData, parseDate } from '../../../scripts/utils/Aux';
+import TokenThumbnail from '../../TokenThumbnail';
 
 interface Props {
   token: TokenData;
@@ -24,6 +25,8 @@ const UserTokenElement = ({ token, popupCallback }: Props) => {
     diamondHandsTimeFrame,
   } = useCollectionContext();
 
+  const tokenCheckboxLabel = `${userWallet.selectedTokens.includes(tokenId) ? 'Deselect' : 'Select'} token #${tokenId}`;
+
   const isDiamondHandsHolderToken = (ownershipStartTimestamp: number) => diamondHandsTimeFrame === undefined ? false : ownershipStartTimestamp + diamondHandsTimeFrame < CURRENT_TIMESTAMP;
 
   return (
@@ -31,16 +34,11 @@ const UserTokenElement = ({ token, popupCallback }: Props) => {
       <input
         type="checkbox"
         checked={userWallet.selectedTokens.includes(tokenId)}
+        disabled={token.tokenBalance.eq(0)}
         onChange={() => handleSelectedToken(tokenId)}
-        aria-label={`${userWallet.selectedTokens.includes(tokenId) ? 'Deselect' : 'Select'} token #${tokenId}`}
+        aria-label={token.tokenBalance.eq(0) ? 'This token has nothing to withdraw' : tokenCheckboxLabel}
       />
-      <img
-        className={styles.hideable}
-        src={`https://cdn.opendevs.io/tokens/public/thumbnails/${tokenId}.jpg`}
-        alt={`Token ${tokenId} thumbnail`}
-        loading="lazy"
-        onClick={popupCallback}
-      />
+      <TokenThumbnail tokenId={tokenId} callback={popupCallback} className={styles.hideable} />
       <div className={styles.tokenId} onClick={popupCallback}>#{tokenId}<IoIosEye /></div>
       <div className={styles.tokenBalance}>{parseFloat(ethers.utils.formatEther(token.tokenBalance)).toFixed(4)} ETH</div>
       <div className={styles.tokenOwnerSince} title={parseDate(token.ownershipStartTimestamp)}>{isDiamondHandsHolderToken(token.ownershipStartTimestamp.toNumber()) && <GrDiamond />}{moment(token.ownershipStartTimestamp.mul(1000).toNumber()).fromNow()}</div>

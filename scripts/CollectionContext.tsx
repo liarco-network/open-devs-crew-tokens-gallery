@@ -1,7 +1,10 @@
 import { BigNumber } from 'ethers';
 import React, { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
-import { useContractRead, useAccount } from 'wagmi';
+import { useContractRead, useAccount, usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi';
+import { Abi } from 'abitype';
+
 import moment from 'moment';
+import { toast } from 'react-toastify';
 
 import { TokenData } from './utils/Aux';
 
@@ -19,6 +22,14 @@ interface UserWalletData {
 
 interface CollectionInterface {
   userWallet: UserWalletData;
+  withdrawData: {
+    withdraw?: () => void;
+    reset: () => void;
+    withdrawLoading: boolean;
+    withdrawSuccess: boolean;
+    withdrawTransactionHash?: string;
+    withdrawError: Error | null;
+  }
   handleSelectedToken: (tokenId: number) => void;
   setAllSelectedTokens: (selectAll: boolean) => void;
   addressInactivityTimeFrame: BigNumber;
@@ -61,7 +72,7 @@ export function CollectionProvider({ children }: Props) {
   const [ selectedTokens, setSelectedTokens ] = useState<number[]>([]);
 
   const { address: userWalletAddress } = useAccount();
-  const contractAbi = require('../assets/contractAbi.json');
+  const contractAbi = require('../assets/contractAbi.json') as Abi;
   const contractAddress = '0x5BfBf78d81CD7d255dFA44d9f568375131361775';
 
   const LOCAL_STORAGE_TOKEN_DATA_KEY = 'token_general_data';
@@ -79,6 +90,7 @@ export function CollectionProvider({ children }: Props) {
     abi: contractAbi,
     functionName: 'getTokensDataInRange',
     args: [1, totalSupply],
+    watch: true,
     enabled: Boolean(totalSupply),
   }) as unknown as { data: TokenData[] };
 
@@ -161,7 +173,9 @@ export function CollectionProvider({ children }: Props) {
   const setAllSelectedTokens = (selectAll: boolean) => {
     if (userTokensData) {
       if (selectAll) {
-        setSelectedTokens(userTokensData.map((token) => token.tokenId.toNumber()));
+        const selectedTokens = userTokensData.filter((token) => !token.tokenBalance.eq(0));
+
+        setSelectedTokens(selectedTokens.map((token) => token.tokenId.toNumber()));
         return;
       }
 
@@ -171,7 +185,8 @@ export function CollectionProvider({ children }: Props) {
 
   const getDiamondHolderToken = useMemo(() => {
     if (userTokensData) {
-      const diamondHolderToken: {tokenId?: number, timestamp: number} = {
+      const diamondHolderToken = {
+        tokenId: 0,
         timestamp: moment().unix() - diamondHandsTimeFrame.toNumber(),
       };
 
@@ -188,11 +203,37 @@ export function CollectionProvider({ children }: Props) {
     }
   },[userTokensData]);
 
+  const { config: withdrawConfig } = usePrepareContractWrite({
+    address: contractAddress,
+    abi: contractAbi,
+    functionName: 'withdraw',
+    args: [getDiamondHolderToken, selectedTokens],
+    enabled: Boolean(getDiamondHolderToken !== undefined && selectedTokens.length !== 0),
+  });
+  const {
+    data: withdrawTxData,
+    isSuccess: withdrawSuccess,
+    error: withdrawError,
+    isLoading: withdrawLoading,
+    write: withdrawWrite,
+    reset: withdrawReset,
+  } = useContractWrite(withdrawConfig);
+
+  const {
+    data: withdrawTransactionData,
+  } = useWaitForTransaction({ hash: withdrawTxData?.hash });
+
   useEffect(() => {
     if (tokensData) {
       tokenTraitDataManager();
     }
   },[totalSupply, tokensData]);
+
+  useEffect(() => {
+    if (withdrawError) {
+      toast.error('There has been an error! Please try again!');
+    }
+  }, [withdrawError]);
 
   const value: CollectionInterface = {
     userWallet: {
@@ -201,6 +242,14 @@ export function CollectionProvider({ children }: Props) {
       selectedTokens,
       diamondHolderToken: getDiamondHolderToken,
       latestWithdrawTimestamp: userLatestWithdrawTimestamp,
+    },
+    withdrawData: {
+      withdraw: () => withdrawWrite?.(),
+      reset: () => withdrawReset?.(),
+      withdrawLoading,
+      withdrawSuccess,
+      withdrawTransactionHash: withdrawTransactionData?.transactionHash,
+      withdrawError,
     },
     handleSelectedToken,
     setAllSelectedTokens,
