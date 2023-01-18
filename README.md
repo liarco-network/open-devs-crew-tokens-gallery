@@ -6,6 +6,15 @@
 
 Welcome to the **[Open Devs Crew](https://opendevs.io)**!
 
-:warning: This project is still under development and it's not ready for production yet. :warning:
+This app is automatically deployed to [crew.opendevs.io](https://crew.opendevs.io), but you can also run it on your machine for maximum safety.
+
+## How to run locally
+```bash
+# Install dependencies
+$ yarn
+
+# Run locally on port 3000
+$ yarn dev
+```
 
 Contributions via PRs or any suggestions are most welcome, feel free to join us!
