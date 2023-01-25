@@ -5,8 +5,12 @@
     @apply font-bold text-lg;
     line-height: 1rem !important;
 
-    svg path {
-      @apply stroke-sky-500;
+    svg {
+      @apply -translate-y-px;
+
+      & path {
+        @apply stroke-sky-500;
+      }
     }
   }
 

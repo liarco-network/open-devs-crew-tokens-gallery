@@ -1,4 +1,4 @@
-import { BigNumber } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 
 export interface TokenData {
   tokenId: BigNumber;
@@ -39,4 +39,14 @@ export const getLatestTimestamp = (latestWithdrawTimestap: BigNumber, userTokens
   });
 
   return latestTimestamp;
+}
+
+export const formatEtherValue = (value: BigNumber): string => {
+  const floatValue = parseFloat(ethers.utils.formatEther(value));
+
+  if (floatValue < 0.001) {
+    return '< 0.001';
+  }
+
+  return (Math.floor(floatValue * 1000) / 1000).toFixed(3);
 }

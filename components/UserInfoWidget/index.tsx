@@ -2,11 +2,11 @@ import styles from './UserInfoWidget.module.scss';
 
 import moment from 'moment';
 import { useEffect, useMemo, useState } from 'react';
-import { BigNumber, ethers } from 'ethers';
-
-import { getLatestTimestamp, parseDateWithoutTime } from '../../scripts/utils/Aux';
-import { useCollectionContext } from '../../scripts/CollectionContext';
 import { GrDiamond } from 'react-icons/gr';
+import { BigNumber } from 'ethers';
+
+import { formatEtherValue, getLatestTimestamp, parseDateWithoutTime } from '../../scripts/utils/Aux';
+import { useCollectionContext } from '../../scripts/CollectionContext';
 import Button from '../Button';
 
 interface Props {
@@ -58,7 +58,7 @@ const UserInfoWidget = ({openPopupCallback}: Props) => {
       userWallet.tokensData.forEach((token) => totalBalance = token.tokenBalance.add(totalBalance));
     }
 
-    return parseFloat(ethers.utils.formatEther(totalBalance)).toFixed(4)
+    return formatEtherValue(totalBalance);
   }, [userWallet.tokensData]);
 
   return (

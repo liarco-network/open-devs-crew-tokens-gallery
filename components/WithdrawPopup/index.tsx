@@ -1,9 +1,10 @@
 import styles from './WithdrawPopup.module.scss';
 
 import { useEffect, useMemo } from 'react';
-import { BigNumber, ethers } from 'ethers';
+import { BigNumber } from 'ethers';
 
 import { useCollectionContext } from '../../scripts/CollectionContext';
+import { formatEtherValue } from '../../scripts/utils/Aux';
 import TransactionLinkEtherscan from '../util/TransactionLinkEtherscan';
 import TokenThumbnail from '../TokenThumbnail';
 import Button from '../Button';
@@ -35,7 +36,7 @@ const WithdrawPopup = ({ closePopupCallback }: Props) => {
       });
     }
 
-    return parseFloat(ethers.utils.formatEther(total)).toFixed(5);
+    return formatEtherValue(total);
   }, [userWallet.selectedTokens, userWallet.tokensData]);
 
   useEffect(() => {

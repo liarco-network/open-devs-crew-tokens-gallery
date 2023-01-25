@@ -1,16 +1,16 @@
 import styles from './TokenPopupCard.module.scss';
 
-import { BigNumber, ethers } from 'ethers';
+import { BigNumber } from 'ethers';
 import { useEffect, useState } from 'react';
 
+import { formatEtherValue, parseDate } from '../../scripts/utils/Aux';
 import { useCollectionContext } from '../../scripts/CollectionContext';
 import AddressLinkEtherscan from '../util/AddressLinkEtherscan';
-
-import OpenSeaLogo from '../../assets/images/icons/opensea.svg';
-import { parseDate } from '../../scripts/utils/Aux';
-import CloseIcon from '../../assets/images/icons/close.svg';
 import AddressLinkOpenSea from '../util/AddressLinkOpenSea';
 import WalletAddress from '../util/WalletAddress';
+
+import OpenSeaLogo from '../../assets/images/icons/opensea.svg';
+import CloseIcon from '../../assets/images/icons/close.svg';
 
 interface TokenData {
   tokenId: BigNumber;
@@ -91,7 +91,7 @@ const TokenPopupCard = ({ token, callback }: Props) => {
               </div>
               <div>
                 <dt>Token balance</dt>
-                <dd>{parseFloat(ethers.utils.formatEther(token.tokenBalance)).toFixed(4)} ETH</dd>
+                <dd>{formatEtherValue(token.tokenBalance)} ETH</dd>
               </div>
               <div>
                 <dt>Latest transfer</dt>
