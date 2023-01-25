@@ -45,12 +45,8 @@
     @apply text-xs sm:text-base;
     @apply text-slate-400;
 
-    svg {
-      @apply -translate-y-px;
-
-      & path {
-        @apply stroke-sky-500;
-      }
+    svg path {
+      @apply stroke-sky-500;
     }
   }
 }
