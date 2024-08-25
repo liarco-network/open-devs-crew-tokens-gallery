@@ -26,14 +26,14 @@ const formatZero = (time: number) => {
   return time >= 10 ? time : '0'+time;
 }
 
-export const getLatestTimestamp = (latestWithdrawTimestap: BigNumber, userTokens: TokenData[]) => {
-  if (!latestWithdrawTimestap.eq(0)) {
-    return latestWithdrawTimestap.toNumber();
+export const getSafeLatestActivityTimestamp = (latestWithdrawTimestamp: BigNumber, userTokens: TokenData[]) => {
+  if (!latestWithdrawTimestamp.eq(0)) {
+    return latestWithdrawTimestamp.toNumber();
   }
 
-  let latestTimestamp = 0;
-  userTokens.filter((token) => {
-    if (token.ownershipStartTimestamp.gt(latestTimestamp)) {
+  let latestTimestamp = userTokens[0].ownershipStartTimestamp.toNumber();
+  userTokens.map((token) => {
+    if (token.ownershipStartTimestamp.lt(latestTimestamp)) {
       latestTimestamp = token.ownershipStartTimestamp.toNumber();
     }
   });

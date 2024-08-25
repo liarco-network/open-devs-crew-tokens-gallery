@@ -30,6 +30,14 @@ interface CollectionInterface {
     withdrawTransactionHash?: string;
     withdrawError: Error | null;
   }
+  refreshLatestWithdrawalTimestampData: {
+    refreshLatestWithdrawalTimestamp?: () => void;
+    reset: () => void;
+    refreshLatestWithdrawalTimestampLoading: boolean;
+    refreshLatestWithdrawalTimestampSuccess: boolean;
+    refreshLatestWithdrawalTimestampTransactionHash?: string;
+    refreshLatestWithdrawalTimestampError: Error | null;
+  }
   handleSelectedToken: (tokenId: number) => void;
   setAllSelectedTokens: (selectAll: boolean) => void;
   addressInactivityTimeFrame: BigNumber;
@@ -100,6 +108,7 @@ export function CollectionProvider({ children }: Props) {
     functionName: 'getLatestWithdrawalTimestamp',
     args: [userWalletAddress],
     enabled: Boolean(userWalletAddress),
+    watch: true,
   }) as unknown as { data: BigNumber };
 
   const { data: addressInactivityTimeFrame } = useContractRead({
@@ -223,6 +232,25 @@ export function CollectionProvider({ children }: Props) {
     data: withdrawTransactionData,
   } = useWaitForTransaction({ hash: withdrawTxData?.hash });
 
+  const { config: refreshLatestWithdrawalTimestampConfig } = usePrepareContractWrite({
+    address: contractAddress,
+    abi: contractAbi,
+    functionName: 'refreshLatestWithdrawalTimestamp',
+    args: [],
+  });
+  const {
+    data: refreshLatestWithdrawalTimestampTxData,
+    isSuccess: refreshLatestWithdrawalTimestampSuccess,
+    error: refreshLatestWithdrawalTimestampError,
+    isLoading: refreshLatestWithdrawalTimestampLoading,
+    write: refreshLatestWithdrawalTimestampWrite,
+    reset: refreshLatestWithdrawalTimestampReset,
+  } = useContractWrite(refreshLatestWithdrawalTimestampConfig);
+
+  const {
+    data: refreshLatestWithdrawalTimestampTransactionData,
+  } = useWaitForTransaction({ hash: refreshLatestWithdrawalTimestampTxData?.hash });
+
   useEffect(() => {
     if (tokensData) {
       tokenTraitDataManager();
@@ -250,6 +278,14 @@ export function CollectionProvider({ children }: Props) {
       withdrawSuccess,
       withdrawTransactionHash: withdrawTransactionData?.transactionHash,
       withdrawError,
+    },
+    refreshLatestWithdrawalTimestampData: {
+      refreshLatestWithdrawalTimestamp: () => refreshLatestWithdrawalTimestampWrite?.(),
+      reset: () => refreshLatestWithdrawalTimestampReset?.(),
+      refreshLatestWithdrawalTimestampLoading,
+      refreshLatestWithdrawalTimestampSuccess,
+      refreshLatestWithdrawalTimestampTransactionHash: refreshLatestWithdrawalTimestampTransactionData?.transactionHash,
+      refreshLatestWithdrawalTimestampError,
     },
     handleSelectedToken,
     setAllSelectedTokens,

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { BiGridAlt } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 
+import WalletExpirationNotice from '../components/WalletExpirationNotice';
 import CustomConnectButton from '../components/CustomConnectButton';
 import WalletDataComponent from '../components/WalletDataComponent';
 import MessageBox from '../components/MessageBox';
@@ -49,6 +50,8 @@ const Wallet: NextPage = () => {
           <CustomConnectButton />
         </div>
       </div>
+
+      <WalletExpirationNotice />
 
       {chainInfo.isConnected
       ?

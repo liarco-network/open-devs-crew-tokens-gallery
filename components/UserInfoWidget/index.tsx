@@ -5,7 +5,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { GrDiamond } from 'react-icons/gr';
 import { BigNumber } from 'ethers';
 
-import { formatEtherValue, getLatestTimestamp, parseDateWithoutTime } from '../../scripts/utils/Aux';
+import {
+  formatEtherValue,
+  getSafeLatestActivityTimestamp,
+  parseDateWithoutTime
+} from '../../scripts/utils/Aux';
 import { useCollectionContext } from '../../scripts/CollectionContext';
 import Button from '../Button';
 
@@ -26,7 +30,7 @@ const UserInfoWidget = ({openPopupCallback}: Props) => {
 
   const latestTimestamp = useMemo(() => {
     if (userWallet.latestWithdrawTimestamp && userWallet.tokensData) {
-      return getLatestTimestamp(userWallet.latestWithdrawTimestamp, userWallet.tokensData);
+      return getSafeLatestActivityTimestamp(userWallet.latestWithdrawTimestamp, userWallet.tokensData);
     }
 
     return 0;

@@ -8,6 +8,7 @@ import { useDebounce } from 'use-debounce';
 import { BiWalletAlt } from 'react-icons/bi';
 import { useAccount } from 'wagmi';
 
+import WalletExpirationNotice from '../components/WalletExpirationNotice';
 import TokensListComponent from '../components/TokensListComponent'
 import CustomConnectButton from '../components/CustomConnectButton';
 
@@ -15,7 +16,7 @@ import OdcLogo from '../assets/images/odc-logo.png';
 import Github from '../assets/images/icons/github.svg';
 
 const Home: NextPage = () => {
-  const [ collectionQuery, setCollectionQuery ] = useState("");
+  const [ collectionQuery, setCollectionQuery ] = useState('');
   const [ isUserConnected, setIsUserConnected ] = useState<boolean>();
   const [githubButtonInView, setGithubButtonInView] = useState(false);
 
@@ -73,6 +74,9 @@ const Home: NextPage = () => {
           }
         </div>
       </div>
+
+      <WalletExpirationNotice />
+
       <input
         placeholder='Search Token ID'
         type={'number'}

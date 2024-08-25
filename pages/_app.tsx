@@ -20,6 +20,9 @@ import Favicon from '../assets/images/icon.png';
 const { chains, provider } = configureChains(
   [ chain.mainnet ],
   [ jsonRpcProvider({ rpc: () => ({ http: 'https://cloudflare-eth.com' }) }) ],
+  // DEV CHAIN
+  //[ chain.hardhat ],
+  //[ jsonRpcProvider({ rpc: () => ({ http: 'http://localhost:8545' }) }) ],
 );
 
 const { connectors } = getDefaultWallets({
@@ -29,7 +32,7 @@ const { connectors } = getDefaultWallets({
 
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors,
+  connectors: () => connectors().filter((connector) => ['injected', 'metaMask'].includes(connector.id)),
   provider,
 });
 
