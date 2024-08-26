@@ -67,7 +67,7 @@ const UserInfoWidget = ({openPopupCallback}: Props) => {
 
   return (
     <>
-      {userWalletAddress && userWallet.tokensData && userWallet.latestWithdrawTimestamp &&
+      {userWalletAddress && userWallet.tokensData && userWallet.latestWithdrawTimestamp && addressInactivityTimeFrame &&
         <>
           <div className={styles.widgetData} title={`Expires ${moment(addressInactivityTimeFrame.add(latestTimestamp).mul(1000).toNumber()).fromNow()}`}>
             <h2>{parseDateWithoutTime(latestTimestamp)}</h2>
