@@ -9,7 +9,7 @@ import { getSafeLatestActivityTimestamp, parseDate } from '../../scripts/utils/A
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
-const WALLET_EXPIRATION_SAFETY_WINDOW = 65 * 24 * 60 * 60; // 60 days
+const WALLET_EXPIRATION_SAFETY_WINDOW = 60 * 24 * 60 * 60; // 60 days
 
 const WalletExpirationNotice = () => {
   const [isReady, setIsReady] = useState(false);
