@@ -19,7 +19,7 @@ import Favicon from '../assets/images/icon.png';
 
 const { chains, provider } = configureChains(
   [ chain.mainnet ],
-  [ jsonRpcProvider({ rpc: () => ({ http: 'https://cloudflare-eth.com' }) }) ],
+  [ jsonRpcProvider({ rpc: () => ({ http: 'https://ethereum-rpc.publicnode.com' }) }) ],
   // DEV CHAIN
   //[ chain.hardhat ],
   //[ jsonRpcProvider({ rpc: () => ({ http: 'http://localhost:8545' }) }) ],
